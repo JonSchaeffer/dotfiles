@@ -1,11 +1,11 @@
-" map leader key to comma
+"map leader key to comma
 let mapleader=","
 set t_Co=256
 set nocompatible
 
 "Set ColorScheme
+colorscheme Tomorrow-Night
 "set background=dark
-"colorscheme solarized
 
 " enable syntax
 syntax enable
@@ -15,13 +15,13 @@ syntax on
 
 " allow filetype to be on
 filetype on
-filetype plugin indent on
+"filetype plugin indent on
 
 "--General Settings--
 set backspace=2
 set tabstop=2
 set shiftwidth=4
-set softtabstop=4
+"set softtabstop=4
 set smarttab
 set expandtab
 "map jk to escape key
@@ -30,7 +30,7 @@ ino kj <Esc>
 ino <F1> <nop>
 nno <F1> <nop>
 vno <F1> <nop>
-
+set nu
 
 
 " Vim plugin manager Vim-Plug
@@ -45,16 +45,14 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'edkolev/tmuxline.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'scrooloose/nerdtree'
-"Plug 'powerline/powerline'
-Plug 'powerline/fonts'
-"Plug 'FredKSchott/CoVim'
 Plug 'majutsushi/tagbar'
-Plug 'jakedouglas/exuberant-ctags'
-Plug 'bronson/vim-trailing-whitespace'
 Plug 'geetarista/ego.vim'
 Plug 'lervag/vimtex'
-Plug 'ajh17/vimcompletesme'
 Plug 'altercation/vim-colors-solarized'
+Plug 'squarefrog/tomorrow-night.vim'
+Plug 'xolox/vim-notes'
+Plug 'xolox/vim-misc'
+
 
 call plug#end()
 
