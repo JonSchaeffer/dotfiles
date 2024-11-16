@@ -25,7 +25,7 @@ ZSH_THEME="agnoster"
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
+zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
@@ -70,7 +70,23 @@ ZSH_THEME="agnoster"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git kubectl)
+plugins=(
+  ansible
+  copypath
+  docker
+  docker-compose
+  encode64
+  fluxcd
+  gh
+  git
+  golang
+  helm
+  kubectl
+  kubectx
+  ssh
+  tailscale
+  zsh-autosuggestions
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -96,22 +112,6 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 alias gal="gcloud auth login"
-alias gprod="gcloud config set project gumband-v2-production"
-alias gstag="gcloud config set project gumband-v2-staging"
-alias gdev="gcloud config set project gumband-v2"
-alias gdevops="gcloud config set project gumband-devops"
-alias gtiktok="gcloud config set project gumband-tiktok"
-alias goperations="gcloud config set project gumband-operations"
-alias gkedev="gcloud container clusters get-credentials gumband-v2-dev --zone us-central1-a --project gumband-v2"
-alias gkevcluster="gcloud container clusters get-credentials vcluster-dev --zone us-central1-a --project gumband-v2"
-alias gkestag="gcloud container clusters get-credentials gumband-v2-staging --zone us-central1-c --project gumband-v2-staging"
-alias gkeprod="gcloud container clusters get-credentials gumband-us-central1 --region us-central1 --project gumband-v2-production"
-alias gketiktok="gcloud container clusters get-credentials com-gumband-tiktok --region us-central1 --project gumband-tiktok"
-alias gterraform="gcloud beta resource-config bulk-export --resource-format=terraform --path=output"
-alias gsshinfra="gcloud compute ssh --project=gumband-devops --zone=us-central1-c infra"
-# Example aliasesgcloud container clusters get-credentials com-gumband-tiktok --region us-central1 --project gumband-tiktok
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/jon/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/jon/Downloads/google-cloud-sdk/path.zsh.inc'; fi
@@ -119,16 +119,15 @@ if [ -f '/Users/jon/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/j
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/jon/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/jon/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
-export SOPS_AGE_KEY_FILE=$HOME/.sops/key.txt
+#export SOPS_AGE_KEY_FILE=$HOME/.sops/key.txt
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
 # k9s Context Aliases
-alias k9sdev="k9s --context gke_gumband-v2_us-central1-a_gumband-v2-dev"
-alias k9sstag="k9s --context gke_gumband-v2-staging_us-central1-c_gumband-v2-staging"
-alias k9sprod="k9s --context gke_gumband-v2-production_us-central1_gumband-us-central1"
-alias k9svcluster="k9s --context gke_gumband-v2_us-central1-a_vcluster-dev"
+alias k9sdev="k9s --context dev -n all"
+alias k9sstag="k9s --context staging -n all"
+alias k9sprod="k9s --context prod -n all"
 
 alias vim="nvim"
 
@@ -144,4 +143,15 @@ alias ooo="~/.config/scripts/ooo"
 # Make a new notes
 alias newnote="~/.config/scripts/newnote"
 
+# Uset Bat over Cat 
+alias cat="bat --paging=never"
+
+# Use kubecolor over kubectl
+alias kubectl="kubecolor"
+
+# Kubectx config
+# right prompt
+RPS1='$(kubectx_prompt_info)'
+
 eval "$(zoxide init --cmd cd zsh)"
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
