@@ -1,0 +1,14 @@
+# Set Shell Integration
+shell-integration = "zsh"
+
+# Set font
+font-family = "RobotoMono Nerd Font"
+
+# Set theme
+theme = "Tomorrow Night"
+
+# Set background color
+# background = "dark gray"
+
+# Disable default keybindings
+keybind = ctrl+c=unbind
